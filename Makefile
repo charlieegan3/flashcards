@@ -5,10 +5,6 @@ IMAGE := charlieegan3/$(PROJECT)
 %-build:
 	docker build -t $(IMAGE)-$*:$(TAG) $*
 
-%-push:
-	make $*-build
-	docker push $(IMAGE)-$*:$(TAG)
-
 %-shell:
 	make $*-build
 	docker run -it -v $(PWD)/$*:/app $(IMAGE)-$*:$(TAG) bash
@@ -16,3 +12,7 @@ IMAGE := charlieegan3/$(PROJECT)
 %-server:
 	make $*-build
 	docker run -it --network="host" -v $(PWD)/$*:/app $(IMAGE)-$*:$(TAG)
+
+%-ship:
+	docker build -t $(IMAGE)-$*:$(TAG) -f $*/Dockerfile.prod $*
+	docker push $(IMAGE)-$*:$(TAG)
