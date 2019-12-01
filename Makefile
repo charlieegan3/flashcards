@@ -1,16 +1,14 @@
 TAG := $(shell tar -cf - . | md5sum | cut -f 1 -d " ")
 PROJECT := flashcards
-IMAGE := charlieegan3/$(PROJECT):$(TAG)
+IMAGE := charlieegan3/$(PROJECT)
 
-build:
-	docker build -t $(IMAGE) .
+build_%:
+	docker build -t $(IMAGE)-$*:$(TAG) $*
 
-push: build
-	docker push $(IMAGE)
+push_%:
+	make build_$*
+	docker push $(IMAGE)-$*:$(TAG)
 
-server: build
-	docker run -it -p 3000:3000 -v $$(pwd):/app $(IMAGE)
-
-# for rails new, rails generate etc
-shell: build
-	docker run -it -v $$(pwd):/app $(IMAGE) bash
+server_%:
+	make build_$*
+	docker run -it -p 3000:3000 $(IMAGE)-$*:$(TAG)
