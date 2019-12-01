@@ -13,7 +13,6 @@ IMAGE := charlieegan3/$(PROJECT)
 	make $*-build
 	docker run -it -v $(PWD)/$*:/app $(IMAGE)-$*:$(TAG) bash
 
-# run as make PORT=3000 X-server
 %-server:
 	make $*-build
-	docker run -it -v $(PWD)/$*:/app -p $(PORT):$(PORT) $(IMAGE)-$*:$(TAG)
+	docker run -it --network="host" -v $(PWD)/$*:/app $(IMAGE)-$*:$(TAG)

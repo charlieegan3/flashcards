@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2019_12_01_170001) do
     t.string "deck"
     t.string "question"
     t.string "answer"
-    t.float "factor"
-    t.integer "schedule"
+    t.float "factor", default: 1.0
+    t.integer "schedule", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deck"], name: "index_cards_on_deck"

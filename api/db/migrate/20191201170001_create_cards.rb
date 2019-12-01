@@ -6,8 +6,8 @@ class CreateCards < ActiveRecord::Migration[6.0]
       t.string :question
       t.string :answer
 
-      t.float :factor
-      t.integer :schedule
+      t.float :factor, default: 1
+      t.integer :schedule, default: 1
 
       t.timestamps
     end

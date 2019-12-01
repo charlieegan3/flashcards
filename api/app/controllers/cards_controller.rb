@@ -12,6 +12,6 @@ class CardsController < ApplicationController
       existing_card.update_supermemo!(c)
     end
 
-    render json: { message: "updated #{results.count(true)}" }
+    render json: Card.all
   end
 end
