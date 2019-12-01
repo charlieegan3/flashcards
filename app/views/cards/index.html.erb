@@ -1,0 +1,13 @@
+<ul>
+<% @cards.group_by { |c| c.deck }.each do |deck, cards| %>
+  <li>
+    <%= deck %>
+    <br>
+    <ul>
+      <% cards.each do |card| %>
+        <li><%= card.question %><%= card.answer %></li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>
