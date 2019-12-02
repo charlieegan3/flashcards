@@ -6,4 +6,15 @@ class Card < ApplicationRecord
 
     false
   end
+
+  def to_h
+    {
+      id: id,
+      deck: deck,
+      question: question,
+      answer: answer,
+      factor: factor,
+      schedule: schedule,
+    }
+  end
 end
