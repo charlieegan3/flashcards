@@ -24,7 +24,7 @@
         </p>
         <button v-on:click="answerDisplayed = true"
                 v-if="!answerDisplayed"
-                class="ba bw2 b--silver ph2 pv1 mr1 w-100">
+                class="ba bw2 b--silver ph2 pv3 mr1 w-100">
           Reveal
         </button>
         <p v-if="answerDisplayed" class="tr">
