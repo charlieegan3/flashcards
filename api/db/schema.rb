@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_01_170001) do
+ActiveRecord::Schema.define(version: 2019_12_02_204558) do
 
   create_table "cards", force: :cascade do |t|
     t.string "digest"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_12_01_170001) do
     t.integer "schedule", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "count", default: 0
     t.index ["deck"], name: "index_cards_on_deck"
     t.index ["digest"], name: "index_cards_on_digest", unique: true
   end

@@ -50,6 +50,7 @@
 	        <td v-if="currentDeckName == 'All'"><code>({{ card.deck }})</code></td>
 	        <td><code>{{ card.factor.toFixed(2) }}</code></td>
 	        <td class="b"><code>{{ card.schedule }}</code></td>
+	        <td><code>{{ card.count }}</code></td>
 	        <td>{{ card.question }}</td>
         </tr>
 	  </table>
