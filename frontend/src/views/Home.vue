@@ -8,17 +8,6 @@
         {{ deck }}
       </button>
     </div>
-    <div>
-      <p>
-        <span>{{ currentDeck.length }} cards</span> -
-        <span>{{ updatedCards().length }} updated</span>
-        <button v-on:click="save"
-                v-if="updatedCards().length > 0"
-                class="ba bw1 b--silver ph2">
-          Save
-        </button>
-      </p>
-    </div>
     <div v-if="currentCard">
         <p class="i bt b--silver pt2">{{ cards[currentCard].question }}</p>
         <p v-if="answerDisplayed" class="i bt b--silver pt2">
@@ -30,12 +19,30 @@
           Reveal
         </button>
         <p v-if="answerDisplayed" class="tr">
-          <button v-for="n in 5"
-                  v-on:click="score(n)"
+          <button v-for="n in 3"
+                  v-on:click="score(n + 2)"
                   class="ba bw2 b--dark-gray ph3 pv1 mr1">
             {{ n }}
           </button>
         </p>
+    </div>
+    <div>
+      <p class="mv1">
+        <span>{{ currentDeck.length }} cards</span> <span>({{ updatedCards().length }} updated)</span>
+        <button v-on:click="save"
+                v-if="updatedCards().length > 0"
+                class="ba bw1 b--silver ph2">
+          Save
+        </button>
+      </p>
+	  <table class="mv0 silver f6">
+        <tr v-for="card in orderedCards">
+	        <td><code>{{ card.id }}</code></td>
+	        <td><code>{{ card.factor }}</code></td>
+	        <td><code>{{ card.schedule }}</code></td>
+	        <td>{{ card.question }}</td>
+        </tr>
+	  </table>
     </div>
   </div>
 </template>
@@ -73,7 +80,7 @@ export default {
       return _.filter(this.cardArray(), function(c) { return c.updated; });
     },
     setCurrentCard: function() {
-      this.currentCard = _.orderBy(this.deckCards(), ['schedule'], ['asc'])[0].id;
+      this.currentCard = this.orderedCards[0].id;
     },
     score: function(quality) {
       var c = this.cards[this.currentCard];
@@ -116,6 +123,11 @@ export default {
       if (this.currentDeck.length > 0)
         this.setCurrentCard();
     }
+  },
+  computed: {
+	orderedCards: function() {
+      return _.orderBy(this.deckCards(), ['schedule'], ['asc']);
+	}
   },
   components: { }
 }
