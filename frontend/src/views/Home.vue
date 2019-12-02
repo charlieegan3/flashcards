@@ -1,6 +1,11 @@
 <template>
   <div class="pa2">
     <div>
+      <button v-on:click="currentDeckName = 'All'"
+              class="ba bw2 b--dark-gray ph2 pv1 mr1"
+              v-bind:class="{ 'b--green': currentDeckName == 'All' }">
+        All
+      </button>
       <button v-for="deck in decks"
               v-on:click="currentDeckName = deck"
               class="ba bw2 b--dark-gray ph2 pv1 mr1"
@@ -9,7 +14,10 @@
       </button>
     </div>
     <div v-if="currentCard">
-        <p class="i bt b--silver pt2">{{ cards[currentCard].question }}</p>
+		<p class="bt b--silver pt2">
+		  <span class="gray"><code>#{{ cards[currentCard].id }}</code></span>&nbsp;
+	      <span class="i">{{ cards[currentCard].question }}</span>
+		</p>
         <p v-if="answerDisplayed" class="i bt b--silver pt2">
           {{ cards[currentCard].answer }}
         </p>
@@ -35,11 +43,12 @@
           Save
         </button>
       </p>
-	  <table class="mv0 silver f6">
+	  <table class="mv0 silver f7">
         <tr v-for="card in orderedCards">
-	        <td><code>{{ card.id }}</code></td>
-	        <td><code>{{ card.factor }}</code></td>
-	        <td><code>{{ card.schedule }}</code></td>
+	        <td><code>#{{ card.id }}</code></td>
+	        <td v-if="currentDeckName == 'All'"><code>({{ card.deck }})</code></td>
+	        <td><code>{{ card.factor.toFixed(2) }}</code></td>
+	        <td class="b"><code>{{ card.schedule }}</code></td>
 	        <td>{{ card.question }}</td>
         </tr>
 	  </table>
@@ -73,6 +82,9 @@ export default {
   methods: {
     cardArray: function() { return Object.values(this.cards) },
     deckCards: function() {
+	  if (this.currentDeckName == "All") {
+        return this.cardArray()
+	  }
       var currentDeckName = this.currentDeckName;
       return _.filter(this.cardArray(), function(c) { return c.deck == currentDeckName; });
     },
@@ -116,6 +128,10 @@ export default {
           this.currentDeckName = this.decks[0];
     },
     currentDeckName: function() {
+	  if (this.currentDeckName == "All") {
+        this.currentDeck = this.cardArray();
+		return
+	  }
       var currentDeckName = this.currentDeckName;
       this.currentDeck = _.filter(this.cards, function(o) { return o.deck == currentDeckName });
     },
