@@ -17,6 +17,7 @@
 		<p class="bt b--silver pt2">
 		  <span class="gray"><code>#{{ cards[currentCard].id }}</code></span>&nbsp;
 	      <span class="i">{{ cards[currentCard].question }}</span>
+	      <span class="ml2 f7 gray" v-if="currentDeckName == 'All'"><code>{{ cards[currentCard].deck }}</code></span>
 		</p>
         <p v-if="answerDisplayed" class="i bt b--silver pt2">
           {{ cards[currentCard].answer }}
