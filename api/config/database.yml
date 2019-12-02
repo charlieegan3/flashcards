@@ -12,5 +12,5 @@ test:
   database: db/test.sqlite3
 
 production:
-  url: <%= ENV.fetch("DATABASE_URL") %>
+  url: <%= ENV.fetch("DATABASE_URL", "") %>
   pool: <%= ENV.fetch("DB_POOL", 2) %>

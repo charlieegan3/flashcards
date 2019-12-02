@@ -13,6 +13,6 @@ IMAGE := charlieegan3/$(PROJECT)
 	make $*-build
 	docker run -it --network="host" -v $(PWD)/$*:/app $(IMAGE)-$*:$(TAG)
 
-%-ship:
-	docker build -t $(IMAGE)-$*:$(TAG) -f $*/Dockerfile.prod $*
-	docker push $(IMAGE)-$*:$(TAG)
+production:
+	docker build -t $(IMAGE):$(TAG) .
+	docker push $(IMAGE):$(TAG)
