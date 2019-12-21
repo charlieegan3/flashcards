@@ -19,7 +19,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv.load("/etc/rails/config/env", ".envrc")
+Dotenv.load(".envrc", ENV["ENV_PATH"])
 
 module Api
   class Application < Rails::Application
