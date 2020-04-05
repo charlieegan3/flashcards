@@ -1,5 +1,4 @@
 FROM node:8-jessie as frontend
-RUN npm install -g yarn
 WORKDIR /build
 
 COPY frontend/package.json frontend/yarn.lock ./
