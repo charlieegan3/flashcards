@@ -10,8 +10,7 @@ COPY frontend .
 RUN yarn build
 
 
-
-FROM ruby:2.6
+FROM ruby:2.7
 WORKDIR /app
 
 COPY api/Gemfile* ./
