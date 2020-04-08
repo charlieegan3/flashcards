@@ -51,6 +51,6 @@ class Notion
   end
 
   def self.select_page_children(page_id, data)
-    data["recordMap"]["block"].select { |_, v| v["value"]["parent_id"] == page_id }
+    (data.dig("recordMap", "block") || []).select { |_, v| v["value"]["parent_id"] == page_id }
   end
 end
