@@ -16,4 +16,4 @@ IMAGE := charlieegan3/$(PROJECT)
 build_frontend_dist:
 	docker build -t $(IMAGE):prod .
 	container=$$(docker create $(IMAGE):prod) && \
-		docker cp $$container:/build/dist public
+		docker cp $$container:/build/dist/. public
