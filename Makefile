@@ -13,6 +13,7 @@ IMAGE := charlieegan3/$(PROJECT)
 	make $*-build
 	docker run -it --network="host" -v $(PWD)/$*:/app $(IMAGE)-$*:$(TAG)
 
-production:
-	docker build -t $(IMAGE):$(TAG) .
-	docker push $(IMAGE):$(TAG)
+build_frontend_dist:
+	docker build -t $(IMAGE):prod .
+	container=$$(docker create $(IMAGE):prod) && \
+		docker cp $$container:/build/dist app/public
